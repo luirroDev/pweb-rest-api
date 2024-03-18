@@ -1,10 +1,15 @@
 import express from 'express';
+import routerAPI from './src/routes/index.js';
 import { config } from './src/database/config.js';
 
 const app = express();
 const port = config.port;
 
-import './src/database/sequelize.js';
+// Configuración de middleware
+app.use(express.json());
+
+// Rutas
+routerAPI(app);
 
 // Iniciar el servidor
 app.listen(port, () => {

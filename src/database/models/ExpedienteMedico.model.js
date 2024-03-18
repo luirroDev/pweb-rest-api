@@ -15,7 +15,7 @@ export const ExpedienteSchema = {
   },
   ci: {
     allowNull: false,
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING(11),
     unique: true,
   },
   sexo: {
