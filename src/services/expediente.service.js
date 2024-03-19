@@ -3,24 +3,27 @@ import { models } from '../database/sequelize.js';
 
 class ExpedienteService {
   async create(data) {
-    return await models.Expediente.create(data);
+    const newData = await models.Expediente.create(data);
+    return newData;
   }
 
-  async find() {
-    return await models.Expediente.findAll();
+  async findAll() {
+    const dataList = await models.Expediente.findAll();
+    return dataList;
   }
 
   async findByID(id) {
-    const expediente = await models.Expediente.findByPk(id);
-    if (!expediente) {
+    const data = await models.Expediente.findByPk(id);
+    if (!data) {
       throw boom.notFound('expediente no encontrado');
     }
-    return expediente;
+    return data;
   }
 
   async update(id, dataChanges) {
-    const expedienteToUpdate = await this.findByID(id);
-    return await expedienteToUpdate.update(dataChanges);
+    const dataToUpdate = await this.findByID(id);
+    const dataUpdated = await dataToUpdate.update(dataChanges);
+    return dataUpdated;
   }
 
   async delete(id) {
@@ -28,7 +31,7 @@ class ExpedienteService {
     await expedienteToDelete.destroy();
     return {
       status: 200,
-      message: 'Expediente eliminado exitosamente',
+      message: 'expediente eliminado exitosamente',
       id: id,
     };
   }
