@@ -20,7 +20,7 @@ export const ExpedienteSchema = {
   },
   sexo: {
     allowNull: false,
-    type: DataTypes.CHAR,
+    type: DataTypes.STRING(1),
   },
   direccion: {
     allowNull: true,
