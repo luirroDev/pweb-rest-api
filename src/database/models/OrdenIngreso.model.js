@@ -19,7 +19,7 @@ export const OrdenIngresoSchema = {
   },
   fecha: {
     allowNull: false,
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
   },
 };
 
