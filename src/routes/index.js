@@ -8,7 +8,7 @@ function routerAPI(app) {
   app.use('/api/v1', router);
   router.use('/expedientes', expedientesRouter);
   router.use('/orden-ingreso', ordenIngresoRouter);
-  router.use('/tratamiento', tratamientoRouter);
+  router.use('/tratamientos', tratamientoRouter);
 }
 
 export default routerAPI;

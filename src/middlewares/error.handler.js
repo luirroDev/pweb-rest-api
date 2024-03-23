@@ -1,7 +1,7 @@
 import { ValidationError } from 'sequelize';
 
 // Función para manejar errores generales
-export function errorHandler(err, req, res) {
+export function errorHandler(err, req, res, next) {
   /* Envía una respuesta con el código de estado 500
   y un mensaje de error */
   res.status(500).json({
