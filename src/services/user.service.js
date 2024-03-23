@@ -39,7 +39,14 @@ class UserService {
 
   async update(id, changes) {
     const user = await this.findOne(id);
+    // Si la contraseña está presente en los cambios, genera un hash de la nueva contraseña
+    if (changes.password) {
+      changes.password = await bcrypt.hash(changes.password, 10);
+    }
+    // Actualiza el usuario con los cambios proporcionados
     const userUpdated = await user.update(changes);
+    // Elimina la contraseña hasheada del objeto de usuario antes de devolverlo
+    delete userUpdated.dataValues.password;
     return userUpdated;
   }
 
