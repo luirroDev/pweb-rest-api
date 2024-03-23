@@ -1,6 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 
-export const TRATAMIENTO_TABLE = 'expedientes';
+export const TRATAMIENTO_TABLE = 'tratamiento';
 
 export const TratamientoSchema = {
   id: {

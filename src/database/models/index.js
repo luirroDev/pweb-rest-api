@@ -1,5 +1,6 @@
 import { Expediente, ExpedienteSchema } from './ExpedienteMedico.model.js';
 import { OrdenIngreso, OrdenIngresoSchema } from './OrdenIngreso.model.js';
+import { Tratamiento, TratamientoSchema } from './Tratamiento.model.js';
 
 export function setupModels(sequelize) {
   return {
@@ -7,6 +8,10 @@ export function setupModels(sequelize) {
     OrdenIngreso: OrdenIngreso.init(
       OrdenIngresoSchema,
       OrdenIngreso.config(sequelize),
+    ),
+    Tratamiento: Tratamiento.init(
+      TratamientoSchema,
+      Tratamiento.config(sequelize),
     ),
   };
 }
