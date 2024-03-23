@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 
 const service = new UserService();
 
-export const LocalStrategy = new Strategy(async (email, password, done) => {
+async function localStrategy(email, password, done) {
   try {
     const user = await service.findByEmail(email);
     if (!user) {
@@ -15,8 +15,14 @@ export const LocalStrategy = new Strategy(async (email, password, done) => {
     if (!isMatch) {
       done(boom.unauthorized(), false);
     }
+    delete user.dataValues.password;
     done(null, true);
   } catch (error) {
     done(error, false);
   }
-});
+}
+
+export const LocalStrategy = new Strategy(
+  { usernameField: 'email', passwordField: 'password' },
+  localStrategy,
+);
