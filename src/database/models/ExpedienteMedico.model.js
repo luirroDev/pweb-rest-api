@@ -33,8 +33,17 @@ export const ExpedienteSchema = {
 };
 
 export class Expediente extends Model {
-  static associate() {
-    //associate
+  static associate(models) {
+    this.hasMany(models.OrdenIngreso, {
+      as: 'ordenes-ingreso',
+      foreignKey: 'expedienteId',
+    });
+    this.belongsToMany(models.Tratamiento, {
+      as: 'tratamientos',
+      through: models.ExpedienteTratamiento,
+      foreignKey: 'expedienteId',
+      otherKey: 'tratamientoId',
+    });
   }
   static config(sequelize) {
     return {

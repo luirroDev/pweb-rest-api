@@ -11,6 +11,7 @@ const app = express();
 const port = config.port;
 
 // Configuración de middlewares
+import './src/auth/index.js';
 app.use(express.json());
 
 // Rutas
