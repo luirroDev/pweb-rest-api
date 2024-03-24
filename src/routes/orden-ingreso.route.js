@@ -6,6 +6,7 @@ import {
   updateOrdenIngresoSchema,
   getOrdenIngresoSchema,
 } from '../validations_schemas/orden-ingreso.schema.js';
+import passport from 'passport';
 
 const router = express.Router();
 const service = new OrdenIngresoService();
@@ -38,6 +39,7 @@ router.get(
 // Create Orden de Ingreso
 router.post(
   '/',
+  passport.authenticate('jwt', { session: false }),
   validatorHandler(createOrdenIngresoSchema, 'body'),
   async (req, res, next) => {
     try {
@@ -53,6 +55,7 @@ router.post(
 // Update Orden de Ingreso
 router.patch(
   '/:id',
+  passport.authenticate('jwt', { session: false }),
   validatorHandler(getOrdenIngresoSchema, 'params'),
   validatorHandler(updateOrdenIngresoSchema, 'body'),
   async (req, res, next) => {
@@ -70,6 +73,7 @@ router.patch(
 // Delete Orden de Ingreso
 router.delete(
   '/:id',
+  passport.authenticate('jwt', { session: false }),
   validatorHandler(getOrdenIngresoSchema, 'params'),
   async (req, res, next) => {
     try {

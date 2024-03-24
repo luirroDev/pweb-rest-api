@@ -6,6 +6,7 @@ import {
   updateTratamientoSchema,
   getTratamientoSchema,
 } from '../validations_schemas/tratamiento.schema.js';
+import passport from 'passport';
 
 const router = express.Router();
 const service = new TratamientoService();
@@ -38,6 +39,7 @@ router.get(
 // Create Tratamiento
 router.post(
   '/',
+  passport.authenticate('jwt', { session: false }),
   validatorHandler(createTratamientoSchema, 'body'),
   async (req, res, next) => {
     try {
@@ -53,6 +55,7 @@ router.post(
 // Update Tratamiento
 router.patch(
   '/:id',
+  passport.authenticate('jwt', { session: false }),
   validatorHandler(getTratamientoSchema, 'params'),
   validatorHandler(updateTratamientoSchema, 'body'),
   async (req, res, next) => {
@@ -70,6 +73,7 @@ router.patch(
 // Delete Tratamiento
 router.delete(
   '/:id',
+  passport.authenticate('jwt', { session: false }),
   validatorHandler(getTratamientoSchema, 'params'),
   async (req, res, next) => {
     try {

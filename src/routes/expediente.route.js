@@ -7,6 +7,7 @@ import {
   updateExpedienteSchema,
   addExpedienteToTratamientoSchema,
 } from '../validations_schemas/expediente.schema.js';
+import passport from 'passport';
 
 const router = express.Router();
 const service = new ExpedienteService();
@@ -40,6 +41,7 @@ router.get(
 // Create Expediente
 router.post(
   '/',
+  passport.authenticate('jwt', { session: false }),
   validatorHandler(createExpedienteSchema, 'body'),
   async (req, res, next) => {
     try {
@@ -55,6 +57,7 @@ router.post(
 // Update Expdiente
 router.patch(
   '/:id',
+  passport.authenticate('jwt', { session: false }),
   validatorHandler(getExpedienteSchema, 'params'),
   validatorHandler(updateExpedienteSchema, 'boddy'),
   async (req, res, next) => {
@@ -72,6 +75,7 @@ router.patch(
 // Delete Expediente
 router.delete(
   '/:id',
+  passport.authenticate('jwt', { session: false }),
   validatorHandler(getExpedienteSchema, 'params'),
   async (req, res, next) => {
     try {
@@ -87,6 +91,7 @@ router.delete(
 // Add Tratamiento
 router.post(
   '/add-tratamiento',
+  passport.authenticate('jwt', { session: false }),
   validatorHandler(addExpedienteToTratamientoSchema, 'body'),
   async (req, res, next) => {
     try {
