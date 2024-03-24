@@ -7,6 +7,7 @@ import {
   getOrdenIngresoSchema,
 } from '../validations_schemas/orden-ingreso.schema.js';
 import passport from 'passport';
+import { checkAdminRole } from '../middlewares/auth.handler.js';
 
 const router = express.Router();
 const service = new OrdenIngresoService();
@@ -74,6 +75,7 @@ router.patch(
 router.delete(
   '/:id',
   passport.authenticate('jwt', { session: false }),
+  checkAdminRole,
   validatorHandler(getOrdenIngresoSchema, 'params'),
   async (req, res, next) => {
     try {

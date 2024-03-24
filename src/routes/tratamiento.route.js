@@ -7,6 +7,7 @@ import {
   getTratamientoSchema,
 } from '../validations_schemas/tratamiento.schema.js';
 import passport from 'passport';
+import { checkAdminRole } from '../middlewares/auth.handler.js';
 
 const router = express.Router();
 const service = new TratamientoService();
@@ -74,6 +75,7 @@ router.patch(
 router.delete(
   '/:id',
   passport.authenticate('jwt', { session: false }),
+  checkAdminRole,
   validatorHandler(getTratamientoSchema, 'params'),
   async (req, res, next) => {
     try {
