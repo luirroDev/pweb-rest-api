@@ -1,4 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
+import { EXPEDIENTE_TABLE } from './ExpedienteMedico.model.js';
 
 export const ORDEN_INGRESO_TABLE = 'orden_ingreso';
 
@@ -21,11 +22,22 @@ export const OrdenIngresoSchema = {
     allowNull: false,
     type: DataTypes.DATEONLY,
   },
+  expedienteId: {
+    field: 'expediente_id',
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    preferences: {
+      model: EXPEDIENTE_TABLE,
+      key: 'id',
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL',
+  },
 };
 
 export class OrdenIngreso extends Model {
-  static associate() {
-    //associate
+  static associate(models) {
+    this.belongsTo(models.Expediente, { as: 'expediente' });
   }
   static config(sequelize) {
     return {
