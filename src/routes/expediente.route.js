@@ -17,7 +17,6 @@ const service = new ExpedienteService();
 router.get('/', async (req, res, next) => {
   try {
     const expedienteList = await service.findAll();
-    console.log(expedienteList);
     res.json(expedienteList);
   } catch (error) {
     next(error);
