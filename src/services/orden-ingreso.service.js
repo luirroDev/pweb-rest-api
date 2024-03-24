@@ -8,7 +8,9 @@ class OrdenIngresoService {
   }
 
   async findAll() {
-    const dataList = await models.OrdenIngreso.findAll();
+    const dataList = await models.OrdenIngreso.findAll({
+      include: ['expediente'],
+    });
     return dataList;
   }
 

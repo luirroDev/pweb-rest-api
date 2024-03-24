@@ -13,7 +13,9 @@ class ExpedienteService {
   }
 
   async findByID(id) {
-    const data = await models.Expediente.findByPk(id);
+    const data = await models.Expediente.findByPk(id, {
+      include: ['ordenes'],
+    });
     if (!data) {
       throw boom.notFound('expediente no encontrado');
     }
