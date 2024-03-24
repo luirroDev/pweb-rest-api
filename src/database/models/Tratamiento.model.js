@@ -24,8 +24,13 @@ export const TratamientoSchema = {
 };
 
 export class Tratamiento extends Model {
-  static associate() {
-    //associate
+  static associate(models) {
+    this.belongsToMany(models.Tratamiento, {
+      as: 'expedientes',
+      through: models.ExpedienteTratamiento,
+      foreignKey: 'tratamientoId',
+      otherKey: 'expedienteId',
+    });
   }
   static config(sequelize) {
     return {

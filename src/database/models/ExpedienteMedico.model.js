@@ -38,6 +38,12 @@ export class Expediente extends Model {
       as: 'ordenes',
       foreignKey: 'expedienteId',
     });
+    this.belongsToMany(models.Tratamiento, {
+      as: 'tratamientos',
+      through: models.ExpedienteTratamiento,
+      foreignKey: 'expedienteId',
+      otherKey: 'tratamientoId',
+    });
   }
   static config(sequelize) {
     return {
