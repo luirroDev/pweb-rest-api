@@ -18,7 +18,8 @@ export default function setupModels(sequelize) {
   );
 
   Expediente.associate(sequelize.models);
+  Tratamiento.associate(sequelize.models);
   OrdenIngreso.associate(sequelize.models);
 
-  return { Expediente, OrdenIngreso, Tratamiento, User };
+  return { Expediente, OrdenIngreso, Tratamiento, User, ExpedienteTratamiento };
 }

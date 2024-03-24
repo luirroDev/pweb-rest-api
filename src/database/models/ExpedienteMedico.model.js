@@ -35,7 +35,7 @@ export const ExpedienteSchema = {
 export class Expediente extends Model {
   static associate(models) {
     this.hasMany(models.OrdenIngreso, {
-      as: 'ordenes',
+      as: 'ordenes-ingreso',
       foreignKey: 'expedienteId',
     });
     this.belongsToMany(models.Tratamiento, {

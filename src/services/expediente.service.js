@@ -7,6 +7,11 @@ class ExpedienteService {
     return newData;
   }
 
+  async addTratamiento(data) {
+    const newData = await models.ExpedienteTratamiento.create(data);
+    return newData;
+  }
+
   async findAll() {
     const dataList = await models.Expediente.findAll();
     return dataList;
@@ -14,7 +19,7 @@ class ExpedienteService {
 
   async findByID(id) {
     const data = await models.Expediente.findByPk(id, {
-      include: ['ordenes'],
+      include: ['ordenes-ingreso', 'tratamientos'],
     });
     if (!data) {
       throw boom.notFound('expediente no encontrado');

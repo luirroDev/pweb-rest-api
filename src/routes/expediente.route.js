@@ -5,6 +5,7 @@ import {
   createExpedienteSchema,
   getExpedienteSchema,
   updateExpedienteSchema,
+  addExpedienteToTratamientoSchema,
 } from '../validations_schemas/expediente.schema.js';
 
 const router = express.Router();
@@ -77,6 +78,21 @@ router.delete(
       const { id } = req.params;
       const result = await service.delete(id);
       res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  },
+);
+
+// Add Tratamiento
+router.post(
+  '/add-tratamiento',
+  validatorHandler(addExpedienteToTratamientoSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const data = req.body;
+      const newExpediente = await service.addTratamiento(data);
+      res.status(201).json(newExpediente);
     } catch (error) {
       next(error);
     }
