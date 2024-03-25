@@ -15,7 +15,9 @@ class OrdenIngresoService {
   }
 
   async findByID(id) {
-    const data = await models.OrdenIngreso.findByPk(id);
+    const data = await models.OrdenIngreso.findByPk(id, {
+      include: ['expediente'],
+    });
     if (!data) {
       throw boom.notFound('Orden de Ingreso no encontrada');
     }
