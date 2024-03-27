@@ -12,7 +12,6 @@ router.post(
       const user = req.user;
       const access_token = signToken(user);
       res.json({
-        user,
         access_token,
       });
     } catch (error) {
